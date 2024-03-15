@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weersvoorspelling</title>
+    <style>
+        body {
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #000000;
+            color: #ffff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #777777;
+        }
+    </style>
+</head>
+<body>
+    <h1>Weersvoorspelling voor {{ city }}, {{ country }}</h1>
+    <table>
+        <tr>
+            <th>Datum</th>
+            <th>Min Temperatuur</th>
+            <th>Max Temperatuur</th>
+            <th>Weersomstandigheden</th>
+            <th>Zons opkomst</th>
+            <th>Zons ondergang</th>
+        </tr>
+        {% for day in forecast_days %}
+            <tr>
+                <td>{{ day['date'] }}</td>
+                <td>{{ day['day']['mintemp_c'] }}°C</td>
+                <td>{{ day['day']['maxtemp_c'] }}°C</td>
+                <td>{{ day['day']['condition']['text'] }}</td>
+                <td>{{ day['astro']['sunrise']}}</td>
+                <td>{{ day['astro']['sunset']}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
